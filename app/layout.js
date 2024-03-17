@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
+import { CartContextProvider } from "@/components/CartContext";
 import { Roboto, Poppins } from "next/font/google";
 import { createGlobalStyle } from "styled-components";
-
 
 const GlobalStyles = createGlobalStyle`
 body{
@@ -14,17 +14,16 @@ body{
 
 `;
 
-
-
-const roboto = Roboto({ subsets: ["latin"], weight: "400"});
-const poppins = Poppins({ subsets: ["latin"], weight: "400"});
-
+const roboto = Roboto({ subsets: ["latin"], weight: "400" });
+const poppins = Poppins({ subsets: ["latin"], weight: "400" });
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <GlobalStyles />
-      <body className={roboto.className}>{children}</body>
+      <CartContextProvider>
+        <body className={roboto.className}>{children}</body>
+      </CartContextProvider>
     </html>
   );
 }

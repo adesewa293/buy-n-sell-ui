@@ -18,6 +18,15 @@ export const ButtonStyle = css`
     margin-right: 5px;
   }
   ${(props) =>
+    props.$block &&
+    css`
+    display: block;
+    width: 100%
+    `};
+
+
+
+  ${(props) =>
     props.$white &&
     !props.$outline &&
     css`
@@ -35,7 +44,7 @@ export const ButtonStyle = css`
   ${(props) =>
     props.$primary && !props.$outline &&
     css`
-      background-color: ${primary}
+      background-color: ${primary};
       border: 1px solid ${primary};
       color: #fff;
     `}
