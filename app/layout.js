@@ -1,11 +1,12 @@
 "use client"
 
-import { Roboto } from "next/font/google";
+import { Roboto, Poppins } from "next/font/google";
 import { createGlobalStyle } from "styled-components";
 
 
 const GlobalStyles = createGlobalStyle`
 body{
+  background-color: #eee;
   padding: 0;
   margin: 0;
   font-family: 'Roboto', sans-serif;
@@ -16,6 +17,7 @@ body{
 
 
 const roboto = Roboto({ subsets: ["latin"], weight: "400"});
+const poppins = Poppins({ subsets: ["latin"], weight: "400"});
 
 
 export default function RootLayout({ children }) {

@@ -1,6 +1,9 @@
 "use client";
 
 import styled, { css } from "styled-components";
+import  {primary} from "@/lib/colors";
+
+
 export const ButtonStyle = css`
   border: 0;
   padding: 5px 15px;
@@ -30,12 +33,20 @@ export const ButtonStyle = css`
       border: 1px solid #fff;
     `}
   ${(props) =>
-    props.$primary &&
+    props.$primary && !props.$outline &&
     css`
-      background-color: #5542f6;
-      border: 1px solid #5542f6;
+      background-color: ${primary}
+      border: 1px solid ${primary};
       color: #fff;
     `}
+    ${(props) =>
+    props.$primary && props.$outline &&
+    css`
+      background-color: transparent;
+      border: 1px solid ${primary};
+      color: ${primary};
+    `}
+
   ${(props) =>
     props.size === "l" &&
     css`
