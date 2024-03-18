@@ -39,6 +39,11 @@ const ProductImageBox = styled.div`
   }
 `;
 
+const ProductChange = styled.td`
+display: flex;
+`;
+
+
 const QuantityLabel = styled.span`
   padding: 0 3px;
 `;
@@ -98,7 +103,7 @@ export default function CartPage() {
                         </ProductImageBox>
                         {product.title}
                       </ProductInfoCell>
-                      <td>
+                      <ProductChange>
                         <button onClick={() => lessOfThisProduct(product._id)}>
                           -
                         </button>
@@ -111,7 +116,7 @@ export default function CartPage() {
                         <button onClick={() => moreOfThisProduct(product._id)}>
                           +
                         </button>
-                      </td>
+                      </ProductChange>
                       <td>
                         $
                         {cartProducts.filter((id) => id === product._id)
