@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import { CartContext } from "@/components/CartContext";
 import axios from "axios";
 import Table from "@/components/Table";
+import Input from "@/components/Input";
 
 const ColumnsWrapper = styled.div`
   display: grid;
@@ -48,9 +49,20 @@ const QuantityLabel = styled.span`
   padding: 0 3px;
 `;
 
+const CityHolder = styled.div`
+display: flex;
+gap: 5px;
+`;
+
+
 export default function CartPage() {
   const { cartProducts, addProduct, removeProduct } = useContext(CartContext);
   const [products, setProducts] = useState([]);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [city, setCity] = useState('');
+
+  
 
   console.log(cartProducts.length, products.length);
   useEffect(() => {
@@ -136,8 +148,14 @@ export default function CartPage() {
           {!!cartProducts?.length && (
             <Box>
               <h2>Order Information</h2>
-              <input type="text" placeholder="Adress line 1" />
-              <input type="text" placeholder="Adress line 2" />
+              <Input type="text" placeholder="Name" />
+              <Input type="text" placeholder="E-mail" />
+              <CityHolder>
+              <Input type="text" placeholder="City" />
+              <Input type="text" placeholder="Postal code" />
+              </CityHolder>
+              <Input type="text" placeholder="Adress line 1" />
+              <Input type="text" placeholder="Country" />
               <Button $block $primary>
                 Continue to payment
               </Button>
