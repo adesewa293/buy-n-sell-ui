@@ -194,6 +194,7 @@ export default function CartPage() {
                   name="country"
                   onChange={(event) => setCountry(event.target.value)}
                 />
+                <input type="hidden" name="products" value={cartProducts.join(',')}/>
                 <Button $block $primary type="submit">
                   Continue to payment
                 </Button>

@@ -1,7 +1,7 @@
 import { mongooseConnect } from "@/lib/mongoose";
 import Featured from "../components/Featured"
 import Header from "../components/Header"
-import { Product } from "@/models/product";
+import { Product } from "@/models/Product";
 import NewProducts from "@/components/NewProducts";
 
 
