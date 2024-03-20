@@ -41,28 +41,27 @@ const ProductImageBox = styled.div`
 `;
 
 const ProductChange = styled.td`
-display: flex;
+  display: flex;
 `;
-
 
 const QuantityLabel = styled.span`
   padding: 0 3px;
 `;
 
 const CityHolder = styled.div`
-display: flex;
-gap: 5px;
+  display: flex;
+  gap: 5px;
 `;
-
 
 export default function CartPage() {
   const { cartProducts, addProduct, removeProduct } = useContext(CartContext);
   const [products, setProducts] = useState([]);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [city, setCity] = useState('');
-
-  
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [streetAddress, setStreetAddress] = useState("");
+  const [country, setCountry] = useState("");
 
   console.log(cartProducts.length, products.length);
   useEffect(() => {
@@ -71,6 +70,8 @@ export default function CartPage() {
         setProducts(response.data);
         console.log("response.data", response.data);
       });
+    } else {
+      setProducts([]);
     }
   }, [cartProducts]);
   function moreOfThisProduct(id) {
@@ -83,9 +84,9 @@ export default function CartPage() {
 
   let total = 0;
   for (const productId of cartProducts) {
-    const price = products.find(p => p._id === productId)?.price || 0;
+    const price = products.find((p) => p._id === productId)?.price || 0;
     total += price;
-  } 
+  }
   return (
     <>
       <Header />
@@ -148,17 +149,55 @@ export default function CartPage() {
           {!!cartProducts?.length && (
             <Box>
               <h2>Order Information</h2>
-              <Input type="text" placeholder="Name" />
-              <Input type="text" placeholder="E-mail" />
-              <CityHolder>
-              <Input type="text" placeholder="City" />
-              <Input type="text" placeholder="Postal code" />
-              </CityHolder>
-              <Input type="text" placeholder="Adress line 1" />
-              <Input type="text" placeholder="Country" />
-              <Button $block $primary>
-                Continue to payment
-              </Button>
+              <form method="post" action="/api/checkout">
+                <Input
+                  type="text"
+                  placeholder="Name"
+                  value={name}
+                  name="name"
+                  onChange={(event) => setName(event.target.value)}
+                />
+                <Input
+                  type="text"
+                  placeholder="E-mail"
+                  value={email}
+                  name="email"
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+                <CityHolder>
+                  <Input
+                    type="text"
+                    placeholder="City"
+                    value={city}
+                    name="city"
+                    onChange={(event) => setCity(event.target.value)}
+                  />
+                  <Input
+                    type="text"
+                    placeholder="Postal code"
+                    value={postalCode}
+                    name="postalCode"
+                    onChange={(event) => setPostalCode(event.target.value)}
+                  />
+                </CityHolder>
+                <Input
+                  type="text"
+                  placeholder="Street Address"
+                  value={streetAddress}
+                  name="streetAddress"
+                  onChange={(event) => setStreetAddress(event.target.value)}
+                />
+                <Input
+                  type="text"
+                  placeholder="Country"
+                  value={country}
+                  name="country"
+                  onChange={(event) => setCountry(event.target.value)}
+                />
+                <Button $block $primary type="submit">
+                  Continue to payment
+                </Button>
+              </form>
             </Box>
           )}
         </ColumnsWrapper>
