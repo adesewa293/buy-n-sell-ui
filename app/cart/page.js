@@ -54,7 +54,8 @@ const CityHolder = styled.div`
 `;
 
 export default function CartPage() {
-  const { cartProducts, addProduct, removeProduct } = useContext(CartContext);
+  const { cartProducts, addProduct, removeProduct, clearCart } =
+    useContext(CartContext);
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -62,6 +63,8 @@ export default function CartPage() {
   const [postalCode, setPostalCode] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
   const [country, setCountry] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+
 
   console.log(cartProducts.length, products.length);
   useEffect(() => {
@@ -74,6 +77,16 @@ export default function CartPage() {
       setProducts([]);
     }
   }, [cartProducts]);
+  useEffect(() => {
+    if(typeof window === 'undefined'){
+      return;
+    }
+    if (window?.location.href.includes('success')) {
+      setIsSuccess(true);
+      clearCart();
+    }
+  }, []);
+
   function moreOfThisProduct(id) {
     addProduct(id);
   }
@@ -86,6 +99,22 @@ export default function CartPage() {
   for (const productId of cartProducts) {
     const price = products.find((p) => p._id === productId)?.price || 0;
     total += price;
+  }
+
+  if (isSuccess) {
+    return (
+      <>
+        <Header />
+        <Center>
+          <ColumnsWrapper>
+            <Box>
+              <h1>Thanks for your order!</h1>
+              <p>We will email you once order is shipped.</p>
+            </Box>
+          </ColumnsWrapper>
+        </Center>
+      </>
+    );
   }
   return (
     <>
@@ -194,7 +223,11 @@ export default function CartPage() {
                   name="country"
                   onChange={(event) => setCountry(event.target.value)}
                 />
-                <input type="hidden" name="products" value={cartProducts.join(',')}/>
+                <input
+                  type="hidden"
+                  name="products"
+                  value={cartProducts.join(",")}
+                />
                 <Button $block $primary type="submit">
                   Continue to payment
                 </Button>

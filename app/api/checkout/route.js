@@ -1,14 +1,10 @@
 import { mongooseConnect } from "@/lib/mongoose";
 import { Order } from "@/models/Order";
 import { Product } from "@/models/Product";
+import { redirect } from "next/navigation";
 const stripe = require("stripe")(process.env.STRIPE_SK);
-import { NextResponse } from "next/server";
 
-export async function POST(req, res) {
-  if (req.method !== "POST") {
-    // res.json("should be a post request");
-    return;
-  }
+  export async function POST(req, res) {
   const formData = await req.formData();
   const name = formData.get("name");
   const email = formData.get("email");
@@ -60,7 +56,5 @@ export async function POST(req, res) {
     metadata: {orderId:orderDoc._id.toString()}
   })
 
-  return NextResponse.json({url:session.url});
-
-
+  return redirect(session.url);
 }
