@@ -4,7 +4,7 @@ import { Product } from "@/models/Product";
 import { redirect } from "next/navigation";
 const stripe = require("stripe")(process.env.STRIPE_SK);
 
-  export async function POST(req, res) {
+  export async function POST(req) {
   const formData = await req.formData();
   const name = formData.get("name");
   const email = formData.get("email");
