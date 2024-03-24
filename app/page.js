@@ -16,7 +16,6 @@ async function getProduct(){
   await mongooseConnect();
   const newProducts = await Product.find({}, null, {sort: {'_id':-1}, limit:10});
   return JSON.parse(JSON.stringify(newProducts));
-
  }
 
 
@@ -24,7 +23,6 @@ async function getProduct(){
 export default async function page() {
   const featuredProduct = await getProduct();
   const newProducts = await getNewProducts();
-  console.log('product', newProducts);
   return (
     <div>
       <Header />
