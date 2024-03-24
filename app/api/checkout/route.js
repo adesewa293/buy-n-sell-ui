@@ -53,7 +53,7 @@ const stripe = require("stripe")(process.env.STRIPE_SK);
     customer_email: email,
     success_url: process.env.PUBLIC_URL + '/cart?success=1',
     cancel_url: process.env.PUBLIC_URL + '/cart?canceled=1',
-    metadata: {orderId:orderDoc._id.toString()}
+    metadata: {orderId:orderDoc._id.toString(),test:'ok'}
   })
 
   return redirect(session.url);
