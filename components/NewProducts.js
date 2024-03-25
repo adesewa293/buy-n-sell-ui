@@ -22,10 +22,7 @@ export default function NewProducts({ products }) {
   return (
     <Center>
       <Title>Summer sale 2024</Title>
-      <ProductsGrid>
-        {products?.length > 0 &&
-          products.map(product => (<ProductBox {...product} />))}
-      </ProductsGrid>
+      <ProductsGrid products={products}/>
     </Center>
   );
 }

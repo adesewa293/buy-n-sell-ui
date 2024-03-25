@@ -25,7 +25,7 @@ export default async function ProductsPage() {
   <Header />
   <Center>
   <Title>All Products</Title>
-{allProducts.length}
+  <ProductsGrid products={products}/>
   </Center>
   </>
 
@@ -33,13 +33,3 @@ export default async function ProductsPage() {
 }
 
 
-
-// export async function getServerSideProps(){
-//   await mongooseConnect();
-//   const products = await Product.find({}, null, {sort:{'_id':-1}});
-//   return {
-//     props:{
-//       products: JSON.parse(JSON.stringify(products)),
-//     }
-//   }
-// }
