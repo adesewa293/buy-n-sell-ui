@@ -1,5 +1,5 @@
 import mongoose, { model, Schema, models } from "mongoose"
-// import { number, string } from "prop-types"
+
 
 const ProductSchema = new Schema({
 title: {type: String, required: true},
