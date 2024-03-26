@@ -8,7 +8,7 @@ const Title = styled.h1`
   font-size: 2.5em;
 `;
 
-export default async function Products({ products }) {
+export default function Products({ products }) {
   return (
     <>
       <Header />
