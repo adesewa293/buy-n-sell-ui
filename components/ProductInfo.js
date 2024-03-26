@@ -7,6 +7,8 @@ import WhiteBox from "./WhiteBox";
 import ProductImages from "./ProductImages";
 import Button from "./Button";
 import CartIcon from "@/icons/CartIcon";
+import { useContext } from "react";
+import { CartContext } from "./CartContext";
 
 const ColWrapper = styled.div`
   display: grid;
@@ -15,12 +17,22 @@ const ColWrapper = styled.div`
   margin-top: 40px;
 `;
 const PriceRow = styled.div`
-  display: flex;
+  display: block;
+  @media screen and (min-width: 768px){
+    display: flex;
+
+  }
   gap: 20px;
   align-items: center;
 `;
+const Price = styled.span`
+font-size:1.4rem;
+`;
+
 
 export default function ProductInfo({ product }) {
+  const {addProduct} = useContext(CartContext);
+
   return (
     <>
       <Header />
@@ -33,9 +45,11 @@ export default function ProductInfo({ product }) {
             <Title>{product.title}</Title>
             <p>{product.description}</p>
             <PriceRow>
-              <div>${product.price}</div>
               <div>
-                <Button $primary>
+              <Price>${product.price}</Price>
+              </div>
+              <div>
+                <Button onClick={() => addProduct(product._id)} $primary >
                   <CartIcon />
                   Add to cart
                 </Button>
